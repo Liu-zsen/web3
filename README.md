@@ -1,3 +1,7 @@
-# Notes
+# 运行方法
 
-本地安装node的环境下  , 打开控制台执行 node pow.js
+1, 确保已安装Node.js
+2, 在终端中运行一下命令:
+    ``` 
+        node pow.js
+    ```

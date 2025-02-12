@@ -31,7 +31,7 @@ function powProofOfWork(prefixZeros) {
         const inputString = "Jason" + nonce;
         const hashValue = crypto.createHash('sha256').update(inputString).digest('hex');
         if (hashValue.startsWith('0'.repeat(prefixZeros))) {
-            console.log(`Found hash with ${prefixZeros} leading zeros:`);
+            console.log(`查找以 ${prefixZeros} 个0开头的哈希值:`);
             console.log(`Input string: ${inputString}`);
             console.log(`Hash value: ${hashValue}`);
             return inputString; // 返回符合条件的字符串
