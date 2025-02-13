@@ -45,14 +45,17 @@ contract Bank {
     function updateTopDepositors(address depositor) internal {
         uint256 depositorBalance = balances[depositor];
 
+        // 如果存款人已经在 top 3 中，直接返回
+        // 如果当前存款人的余额大于 topDepositors[i] 的余额
         for (uint256 i = 0; i < 3; i++) {
             if (topDepositors[i] == depositor) return;
 
             if (depositorBalance > balances[topDepositors[i]]) {
-                // 移动数组并插入新的存款
+                // 将数组从 i 开始向后移位，为新存款人腾出位置
                 for (uint256 j = 2; j > i; j--) {
                     topDepositors[j] = topDepositors[j - 1];
                 }
+                // 将新存款人插入到正确的位置
                 topDepositors[i] = depositor;
                 return;
             }
