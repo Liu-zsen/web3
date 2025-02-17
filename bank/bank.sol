@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.24;
+import "./IBank.sol";
 
 /**
     编写一个 Bank 合约，实现功能：
@@ -8,7 +9,7 @@ pragma solidity ^0.8.0;
     编写 withdraw() 方法，仅管理员可以通过该方法提取资金。
     用数组记录存款金额的前 3 名用户
 **/
-contract Bank {
+contract Bank is IBank{
     address public admin;
     mapping(address => uint256) public balances;
     address[3] public topDepositors;
@@ -27,7 +28,7 @@ contract Bank {
     }
 
     // 用户可以通过 deposit() 函数向合约地址发送 ETH
-    function deposit() public payable {
+    function deposit() public payable virtual{
         require(msg.value > 0, "Deposit amount must be greater than 0");
         balances[msg.sender] += msg.value;
         updateTopDepositors(msg.sender);
@@ -65,5 +66,11 @@ contract Bank {
     // 查询前 3 名存款用户。
     function getTopDepositors() external view returns (address[3] memory) {
         return topDepositors;
+    }
+
+    // 将管理员地址设置为 Admin 合约地址。
+    function transferAdmin(address newAdmin) external override onlyAdmin {
+        require(newAdmin != address(0), "New admin cannot be the zero address");
+        admin = newAdmin;
     }
 }
