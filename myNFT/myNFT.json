@@ -1,0 +1,16 @@
+{
+  "title": "集训营学员 - liuzhisen",
+  "description": "OpenSpace - 华语 Web3 黄埔军校",
+  "image": "ipfs://bafkreidzu7dlilzca2ayez5wt7zbjaojzcjm2v5cpvdcin2p347kwegpw4",
+  "attributes": [
+    {
+      "trait_type": "学号",
+      "value": "02002"
+    },
+    {
+      "trait_type": "昵称",
+      "value": "Jason"
+    }
+  ],
+  "version": "2"
+}
