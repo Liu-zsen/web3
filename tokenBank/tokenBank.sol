@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract TokenBank {
     // 存储每个地址的 Token 余额
-    mapping(address => mapping(address => uint256)) private balances;
+    mapping(address => mapping(address => uint256)) public balances;
 
     // Token 合约地址
     address public tokenAddress;
