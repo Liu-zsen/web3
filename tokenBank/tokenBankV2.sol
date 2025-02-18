@@ -49,6 +49,7 @@ contract TokenBankV2 is TokenBank ,ITokenReceiver {
     }
     
     function tokensReceived(address sender, uint256 amount) external override returns (bool) {
+        require(msg.sender == address(tokenAddress),"Invaild Token");
         // 记录用户的存款
         balances[tokenAddress][sender] += amount;
         return true;
