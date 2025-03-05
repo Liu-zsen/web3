@@ -6,7 +6,7 @@ pragma solidity ^0.8.24;
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/IERC20Permit.sol";
 
-// sepolia: 0x1Cd149D60b15cD3F654f382F5f26D1FeDd225F82
+// 已经部署在sepolia地址: 0x1Cd149D60b15cD3F654f382F5f26D1FeDd225F82
 contract TokenBank {
     // 存储每个地址的 Token 余额
     mapping(address => mapping(address => uint256)) public balances;
@@ -76,6 +76,13 @@ contract TokenBank {
         // 更新用户在该代币中的余额
         balances[msg.sender][data.tokenAddress] += data.amount;
         emit PermitDeposited(msg.sender, data.tokenAddress, data.amount);
+    }
+
+    function tokensReceived(address sender,address tokenAddress, uint256 amount) external returns (bool) {
+        require(msg.sender == address(tokenAddress),"Invaild Token");
+        // 记录用户的存款
+        balances[sender][tokenAddress] += amount;
+        return true;
     }
 
     // 获取用户的 Token 余额
